@@ -1,0 +1,70 @@
+.community-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.community-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.new-post-button {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.new-post-button:hover {
+  transform: translateY(-2px);
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.post-card {
+  background: var(--bg-secondary);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.post-image {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.post-content {
+  color: var(--text-primary);
+}
+
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.post-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.like-button, .comment-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--accent-color);
+  font-size: 1rem;
+}
