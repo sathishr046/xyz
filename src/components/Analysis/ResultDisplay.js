@@ -3,11 +3,16 @@ import { SettingsContext } from '../../context/SettingsContext';
 import './ResultDisplay.css';
 import MedicineSuggestions from './MedicineSuggestions';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+
+const genAI = new GoogleGenerativeAI('YOUR_API_KEY_HERE');
 
 const ResultDisplay = ({ result }) => {
   const { settings, updateSettings } = useContext(SettingsContext);
   const [translatedContent, setTranslatedContent] = useState(null);
   const [isTranslating, setIsTranslating] = useState(false);
+  const [extraQuestion, setExtraQuestion] = useState('');
+  const [extraAnswer, setExtraAnswer] = useState('');
 
   useEffect(() => {
     const translateResults = async () => {
@@ -19,7 +24,7 @@ const ResultDisplay = ({ result }) => {
       try {
         setIsTranslating(true);
         const structured = parseAndStructureResult(result);
-        
+
         if (structured.qaFormat) {
           const translated = await Promise.all(
             structured.qaFormat.map(async (qa) => ({
@@ -41,6 +46,22 @@ const ResultDisplay = ({ result }) => {
 
     translateResults();
   }, [result, settings.language]);
+
+  const handleExtraQuestionSubmit = async () => {
+    if (!extraQuestion) return;
+
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const prompt = `Answer the following question based on the plant analysis: ${extraQuestion}`;
+      const result = await model.generateContent(prompt);
+      const response = await result.response;
+      const text = response.text();
+      setExtraAnswer(text);
+    } catch (error) {
+      console.error('Error answering extra question:', error);
+      setExtraAnswer('Sorry, there was an error processing your question.');
+    }
+  };
 
   const translateContent = async (text, targetLanguage) => {
     if (!text || targetLanguage === 'en') return text;
@@ -161,6 +182,22 @@ const ResultDisplay = ({ result }) => {
           </div>
         )
       )}
+
+      <div className="extra-question-section">
+        <h3>Ask Additional Questions</h3>
+        <input
+          type="text"
+          value={extraQuestion}
+          onChange={(e) => setExtraQuestion(e.target.value)}
+          placeholder="Type your question here..."
+        />
+        <button onClick={handleExtraQuestionSubmit}>Submit</button>
+        {extraAnswer && (
+          <div className="qa-answer">
+            <p>{extraAnswer}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

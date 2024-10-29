@@ -1,0 +1,80 @@
+/* Forecast Styles */
+.forecast-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.forecast-card {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Air Quality Styles */
+.aqi-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 15px;
+}
+
+.aqi-display {
+  padding: 2rem;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+}
+
+/* Alerts Styles */
+.alerts-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #fff5f5;
+  border-radius: 15px;
+}
+
+.alert-item {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+/* Favorites Styles */
+.favorites-container {
+  margin-top: 2rem;
+}
+
+.favorite-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.favorite-button {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  background: #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.remove-favorite {
+  padding: 0.5rem;
+  border: none;
+  background: #ff6b6b;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+} 

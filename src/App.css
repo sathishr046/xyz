@@ -39,13 +39,10 @@
 
 /* Add proper spacing for content */
 .content-wrapper {
-  padding-top: 80px; /* Increased from 60px to give more space */
-  min-height: calc(100vh - 80px);
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0 20px;
   position: relative;
   z-index: 1;
 }
@@ -63,7 +60,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main-content {
-  min-height: calc(100vh - 80px);
+  padding-top: 60px; /* Match navbar height */
+  min-height: calc(100vh - 60px);
+  width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 /* Ensure all page content respects the navbar */

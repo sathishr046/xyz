@@ -42,6 +42,10 @@ main {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  position: relative;
+  z-index: 1001;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-link {
@@ -51,11 +55,21 @@ main {
   text-decoration: none;
   transition: all 0.3s ease;
   padding: 0.5rem;
+  z-index: 1002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px; /* Add minimum width to prevent icon squishing */
+}
+
+/* Add specific styling for home icon */
+.nav-link.home-icon {
+  margin-right: 0.5rem; /* Add spacing between icons */
 }
 
 .nav-link span {
   position: absolute;
-  bottom: -35px; /* Changed from top to bottom */
+  bottom: -35px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(46, 204, 113, 0.9);
@@ -67,7 +81,8 @@ main {
   visibility: hidden;
   transition: all 0.3s ease;
   white-space: nowrap;
-  z-index: 1001;
+  z-index: 1003;
+  pointer-events: none; /* Prevent tooltip from interfering with clicks */
 }
 
 .nav-link:hover span {
@@ -144,6 +159,19 @@ main {
     width: 100%;
     border-radius: 25px;
     margin: 0.5rem 0;
+  }
+
+  .nav-link {
+    font-size: 1.3rem;
+    padding: 0.8rem;
+  }
+
+  .nav-link span {
+    display: none; /* Hide tooltips on mobile */
+  }
+
+  .navbar-links {
+    gap: 1rem;
   }
 }
 

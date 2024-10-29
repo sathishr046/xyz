@@ -9,7 +9,12 @@ const Navbar = () => {
   const { translate } = useContext(SettingsContext);
   const location = useLocation();
 
-  const isActive = (path) => location.pathname === path;
+  const isActive = (path) => {
+    if (path === '/') {
+      return location.pathname === '/' || location.pathname === '/home';
+    }
+    return location.pathname === path;
+  };
 
   return (
     <nav className="navbar">
@@ -21,7 +26,10 @@ const Navbar = () => {
       </Link>
 
       <div className="navbar-links">
-        <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>
+        <Link 
+          to="/" 
+          className={`nav-link home-icon ${isActive('/') ? 'active' : ''}`}
+        >
           🏠
           <span>{translate('home')}</span>
         </Link>
@@ -44,6 +52,10 @@ const Navbar = () => {
         <Link to="/about" className={`nav-link ${isActive('/about') ? 'active' : ''}`}>
           ℹ️
           <span>{translate('about')}</span>
+        </Link>
+        <Link to="/weather" className={`nav-link ${isActive('/weather') ? 'active' : ''}`}>
+          🌤️
+          <span>{translate('weather')}</span>
         </Link>
         <button 
           className="settings-button" 

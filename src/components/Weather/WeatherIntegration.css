@@ -1,59 +1,336 @@
-.weather-container {
-  padding: 2rem;
-  max-width: 600px;
-  margin: 0 auto;
-  text-align: center;
+.weather-page {
+  min-height: calc(100vh - 80px);
+  padding-top: 80px;
+  background: #f5f7fa;
 }
 
-.weather-card {
-  background: var(--bg-secondary);
-  border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+.main-content {
+  padding-top: 80px; /* Adjust this value based on your navbar height */
+  min-height: calc(100vh - 80px);
+  background: #f5f7fa;
+}
+
+.weather-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.weather-content {
+  background: linear-gradient(135deg, #f6f9fc 0%, #ffffff 100%);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.location-info {
+  text-align: center;
   margin-bottom: 2rem;
 }
 
-.weather-header {
-  margin-bottom: 1rem;
+.location-info h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
 }
 
-.location {
-  font-size: 1.2rem;
-  color: var(--text-primary);
+.coordinates {
+  color: #7f8c8d;
+  font-size: 0.9rem;
 }
 
-.weather-info {
+.current-weather {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  color: var(--text-primary);
+  gap: 2rem;
+  margin-bottom: 3rem;
 }
 
 .temperature {
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #2c3e50;
 }
 
-.conditions, .humidity {
-  font-size: 1rem;
+.weather-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 
-.plant-care-advice {
-  background: var(--bg-secondary);
-  border-radius: 15px;
+.detail-item {
+  background: rgba(255, 255, 255, 0.9);
   padding: 1.5rem;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-.plant-care-advice h3 {
+.detail-item:hover {
+  transform: translateY(-5px);
+}
+
+.detail-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.detail-label {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.detail-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.forecast-section {
+  margin-top: 3rem;
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.forecast-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
+  border-radius: 15px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.forecast-card:hover {
+  transform: translateY(-5px);
+}
+
+.advice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.advice-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.advice-card:hover {
+  transform: translateY(-5px);
+}
+
+.advice-card.warning {
+  border-left: 4px solid #e74c3c;
+}
+
+.advice-card.info {
+  border-left: 4px solid #3498db;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #2ecc71;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
   margin-bottom: 1rem;
 }
 
-.plant-care-advice ul {
-  list-style: none;
-  padding: 0;
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-.plant-care-advice li {
-  margin-bottom: 0.5rem;
+.error-container {
+  text-align: center;
+  padding: 2rem;
+  background: #fff5f5;
+  border-radius: 15px;
+  color: #e74c3c;
+}
+
+.error-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .weather-content {
+    padding: 1.5rem;
+  }
+  
+  .temperature {
+    font-size: 3rem;
+  }
+  
+  .weather-details {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.weather-container {
+  padding: 2rem;
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.weather-loading {
+  text-align: center;
+  padding: 3rem;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.weather-error {
+  text-align: center;
+  padding: 2rem;
+  background: #fff5f5;
+  border-radius: 15px;
+  color: #e74c3c;
+  max-width: 400px;
+  margin: 2rem auto;
+}
+
+.retry-button {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background 0.3s;
+}
+
+.retry-button:hover {
+  background: #c0392b;
+}
+
+.search-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.search-container form {
+  display: flex;
+  gap: 1rem;
+}
+
+.search-input {
+  flex: 1;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #00B4DB;
+}
+
+.search-button {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #00B4DB 0%, #0083B0 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 180, 219, 0.2);
+}
+
+.search-button:active {
+  transform: translateY(0);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .search-container form {
+    flex-direction: column;
+  }
+
+  .search-button {
+    width: 100%;
+  }
+}
+
+/* Loading and error states */
+.loading-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #00B4DB;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-container {
+  text-align: center;
+  padding: 2rem;
+  background: #fff5f5;
+  border-radius: 15px;
+  color: #e74c3c;
+  max-width: 400px;
+  margin: 2rem auto;
 }

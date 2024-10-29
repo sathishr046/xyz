@@ -198,7 +198,252 @@ const categories = [
     { id: 'commercial', name: 'Commercial Crops', emoji: '🌿' },
     { id: 'ornamental', name: 'Ornamental Plants', emoji: '🌺' },
     { id: 'medicinal', name: 'Medicinal Plants', emoji: '🌿' },
+    { id: 'trees', name: 'Trees', emoji: '🌳' },
     { id: 'others', name: 'Unknown Plant', emoji: '🔍' }
+];
+
+// Add 100 trees to the plants array
+const treesData = [
+    {
+        id: 191,
+        name: 'Banyan',
+        scientificName: 'Ficus benghalensis',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'National tree of India'
+    },
+    {
+        id: 192,
+        name: 'Neem',
+        scientificName: 'Azadirachta indica',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Medicinal tree'
+    },
+    {
+        id: 193,
+        name: 'Peepal',
+        scientificName: 'Ficus religiosa',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Sacred fig tree'
+    },
+    {
+        id: 194,
+        name: 'Teak',
+        scientificName: 'Tectona grandis',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Valuable timber tree'
+    },
+    {
+        id: 195,
+        name: 'Ashoka',
+        scientificName: 'Saraca asoca',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Sacred tree of India'
+    },
+    {
+        id: 196,
+        name: 'Gulmohar',
+        scientificName: 'Delonix regia',
+        category: 'trees',
+        emoji: '🌺',
+        description: 'Flamboyant tree'
+    },
+    {
+        id: 197,
+        name: 'Sal',
+        scientificName: 'Shorea robusta',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Important timber tree'
+    },
+    {
+        id: 198,
+        name: 'Jamun',
+        scientificName: 'Syzygium cumini',
+        category: 'trees',
+        emoji: '����',
+        description: 'Indian blackberry tree'
+    },
+    {
+        id: 199,
+        name: 'Arjuna',
+        scientificName: 'Terminalia arjuna',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Medicinal bark tree'
+    },
+    {
+        id: 200,
+        name: 'Tamarind',
+        scientificName: 'Tamarindus indica',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Sour fruit tree'
+    },
+    {
+        id: 201,
+        name: 'Sandalwood',
+        scientificName: 'Santalum album',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Fragrant wood tree'
+    },
+    {
+        id: 202,
+        name: 'Bamboo',
+        scientificName: 'Bambusoideae',
+        category: 'trees',
+        emoji: '🎋',
+        description: 'Fast-growing grass tree'
+    },
+    {
+        id: 203,
+        name: 'Amla',
+        scientificName: 'Phyllanthus emblica',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Indian gooseberry tree'
+    },
+    {
+        id: 204,
+        name: 'Mahua',
+        scientificName: 'Madhuca longifolia',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Butter tree'
+    },
+    {
+        id: 205,
+        name: 'Palash',
+        scientificName: 'Butea monosperma',
+        category: 'trees',
+        emoji: '🌺',
+        description: 'Flame of the forest'
+    },
+    {
+        id: 206,
+        name: 'Kadamba',
+        scientificName: 'Neolamarckia cadamba',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Ancient sacred tree'
+    },
+    {
+        id: 207,
+        name: 'Sheesham',
+        scientificName: 'Dalbergia sissoo',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Indian rosewood'
+    },
+    {
+        id: 208,
+        name: 'Amaltas',
+        scientificName: 'Cassia fistula',
+        category: 'trees',
+        emoji: '🌼',
+        description: 'Golden shower tree'
+    },
+    {
+        id: 209,
+        name: 'Karanj',
+        scientificName: 'Pongamia pinnata',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Indian beech'
+    },
+    {
+        id: 210,
+        name: 'Babul',
+        scientificName: 'Acacia nilotica',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Gum arabic tree'
+    },
+    {
+        id: 211,
+        name: 'Chinar',
+        scientificName: 'Platanus orientalis',
+        category: 'trees',
+        emoji: '🍁',
+        description: 'Oriental plane tree'
+    },
+    {
+        id: 212,
+        name: 'Deodar',
+        scientificName: 'Cedrus deodara',
+        category: 'trees',
+        emoji: '🌲',
+        description: 'Himalayan cedar'
+    },
+    {
+        id: 213,
+        name: 'Mango',
+        scientificName: 'Mangifera indica',
+        category: 'trees',
+        emoji: '🥭',
+        description: 'National fruit tree'
+    },
+    {
+        id: 214,
+        name: 'Jackfruit',
+        scientificName: 'Artocarpus heterophyllus',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Largest tree fruit'
+    },
+    {
+        id: 215,
+        name: 'Coconut Palm',
+        scientificName: 'Cocos nucifera',
+        category: 'trees',
+        emoji: '🌴',
+        description: 'Tropical palm tree'
+    },
+    {
+        id: 216,
+        name: 'Mulberry',
+        scientificName: 'Morus alba',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Silkworm host tree'
+    },
+    {
+        id: 217,
+        name: 'Indian Cork',
+        scientificName: 'Millingtonia hortensis',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Indian cork tree'
+    },
+    {
+        id: 218,
+        name: 'Kachnar',
+        scientificName: 'Bauhinia variegata',
+        category: 'trees',
+        emoji: '🌸',
+        description: 'Orchid tree'
+    },
+    {
+        id: 219,
+        name: 'Parijat',
+        scientificName: 'Nyctanthes arbor-tristis',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Night jasmine tree'
+    },
+    {
+        id: 220,
+        name: 'Indian Coral',
+        scientificName: 'Erythrina variegata',
+        category: 'trees',
+        emoji: '🌳',
+        description: 'Tiger claw tree'
+    }
 ];
 
 // Plants Database
@@ -967,8 +1212,8 @@ const plants = [
       category: 'medicinal',
       emoji: '🌺',
       description: 'Ornamental climber'
-  }
-    // ... (rest of the plants data)
+  },
+    ...treesData
 ];
 
 // React Component
@@ -1101,13 +1346,25 @@ const PlantIdentifier = () => {
         }
     };
 
-    const handlePlantSelection = (plantId) => {
-        setSelectedPlant(prev => {
-            if (prev && prev.id === plantId) {
-                return null;
-            }
-            return plants.find(p => p.id === plantId);
-        });
+    const handlePlantSelection = (categoryId) => {
+        if (categoryId === 'others') {
+            // Directly show camera/upload options without selecting a specific plant
+            setSelectedPlant({ 
+                id: 'unknown', 
+                name: 'Unknown Plant', 
+                category: 'others',
+                emoji: '🔍'
+            });
+        } else {
+            // Existing plant selection logic
+            setSelectedPlant(prev => {
+                if (prev && prev.id === categoryId) {
+                    return null;
+                }
+                const plant = plants.find(p => p.id === categoryId);
+                return plant;
+            });
+        }
     };
 
     const filteredPlants = plants.filter(plant => {
@@ -1118,27 +1375,42 @@ const PlantIdentifier = () => {
 
     return (
         <div className="plant-identifier-container">
+            <div className="translate-widget-container">
+                <div id="google_translate_element"></div>
+            </div>
+
             <header className="header">
                 <h1>Plant Identifier</h1>
-                <p>Select a plant or choose 'Other' for unknown plants</p>
+                <p>Select a plant or choose 'Unknown Plant' for identification</p>
             </header>
 
-            <div className="search-section">
-                <input
-                    type="text"
-                    placeholder="🔍 Search plants..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="search-input"
-                />
-            </div>
+            {(!selectedPlant || selectedPlant.category !== 'others') && (
+                <div className="search-section">
+                    <input
+                        type="text"
+                        placeholder="🔍 Search plants..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="search-input"
+                    />
+                </div>
+            )}
 
             <div className="categories-section">
                 {categories.map(category => (
                     <div
                         key={category.id}
-                        className={`category-tile ${selectedCategory === category.id ? 'active' : ''}`}
-                        onClick={() => setSelectedCategory(category.id)}
+                        className={`category-tile ${
+                            selectedCategory === category.id ? 'active' : ''
+                        } ${
+                            category.id === 'others' ? 'others-category' : ''
+                        }`}
+                        onClick={() => {
+                            setSelectedCategory(category.id);
+                            if (category.id === 'others') {
+                                handlePlantSelection('others');
+                            }
+                        }}
                     >
                         <span className="category-emoji">{category.emoji}</span>
                         <span className="category-name">{category.name}</span>
@@ -1146,27 +1418,39 @@ const PlantIdentifier = () => {
                 ))}
             </div>
 
-            <div className="plants-section">
-                {filteredPlants.map(plant => (
-                    <div
-                        key={plant.id}
-                        className={`plant-tile ${
-                            selectedPlant && selectedPlant.id === plant.id ? 'selected' : ''
-                        } ${
-                            selectedPlant && selectedPlant.id !== plant.id ? 'disabled' : ''
-                        }`}
-                        onClick={() => handlePlantSelection(plant.id)}
-                    >
-                        <span className="plant-emoji">{plant.emoji}</span>
-                        <span className="plant-name">{plant.name}</span>
-                    </div>
-                ))}
-            </div>
+            {(!selectedPlant || selectedPlant.category !== 'others') && (
+                <div className="plants-section">
+                    {filteredPlants.map(plant => (
+                        <div
+                            key={plant.id}
+                            className={`plant-tile ${
+                                selectedPlant && selectedPlant.id === plant.id ? 'selected' : ''
+                            } ${
+                                selectedPlant && selectedPlant.id !== plant.id ? 'disabled' : ''
+                            }`}
+                            onClick={() => handlePlantSelection(plant.id)}
+                        >
+                            <span className="plant-emoji">{plant.emoji}</span>
+                            <span className="plant-name">{plant.name}</span>
+                        </div>
+                    ))}
+                </div>
+            )}
 
             {selectedPlant && (
                 <div className="analysis-modal">
                     <div className="modal-content">
-                        <h2>{selectedPlant?.name || 'Plant'} Analysis</h2>
+                        <h2>
+                            {selectedPlant.category === 'others' 
+                                ? 'Plant Identification' 
+                                : `${selectedPlant.name} Analysis`}
+                        </h2>
+                        
+                        {selectedPlant.category === 'others' ? (
+                            <p className="identification-prompt">
+                                Please upload or take a photo of the plant you'd like to identify
+                            </p>
+                        ) : null}
                         
                         <div className="upload-options">
                             <label className="upload-button">
@@ -1224,7 +1508,11 @@ const PlantIdentifier = () => {
                         {loading && (
                             <div className="loading-spinner">
                                 <div className="spinner"></div>
-                                <p>Analyzing image...</p>
+                                <p>
+                                    {selectedPlant.category === 'others' 
+                                        ? 'Identifying plant...' 
+                                        : 'Analyzing image...'}
+                                </p>
                             </div>
                         )}
 

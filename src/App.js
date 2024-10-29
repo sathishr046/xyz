@@ -23,16 +23,19 @@ function App() {
         <HistoryProvider>
           <div className="app">
             <Navbar />
-            <div className="content-wrapper">
-              <LanguagePrompt />
+            <main className="main-content">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/analyze" element={<PlantIdentifier />} />
+                <Route path="/weather" element={<WeatherIntegration />} />
                 <Route path="/history" element={<History />} />
                 <Route path="/encyclopedia" element={<PlantEncyclopedia />} />
                 <Route path="/community" element={<CommunityHub />} />
                 <Route path="/about" element={<About />} />
               </Routes>
+            </main>
+            <div className="content-wrapper">
+              <LanguagePrompt />
               <ToastContainer />
             </div>
           </div>
