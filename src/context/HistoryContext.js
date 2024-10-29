@@ -3,46 +3,33 @@ import React, { createContext, useState, useEffect } from 'react';
 export const HistoryContext = createContext();
 
 export const HistoryProvider = ({ children }) => {
-  const [history, setHistory] = useState([]);
+    const [history, setHistory] = useState(() => {
+        const savedHistory = localStorage.getItem('plantAnalysisHistory');
+        return savedHistory ? JSON.parse(savedHistory) : [];
+    });
 
-  useEffect(() => {
-    const savedHistory = localStorage.getItem('plantAnalysisHistory');
-    if (savedHistory) {
-      setHistory(JSON.parse(savedHistory));
-    }
-  }, []);
+    useEffect(() => {
+        localStorage.setItem('plantAnalysisHistory', JSON.stringify(history));
+    }, [history]);
 
-  const addToHistory = (analysis) => {
-    const newAnalysis = {
-      id: Date.now(),
-      date: new Date().toISOString(),
-      ...analysis
+    const addToHistory = (analysisData) => {
+        setHistory(prevHistory => {
+            const newHistory = [{
+                id: Date.now(),
+                ...analysisData
+            }, ...prevHistory];
+            return newHistory;
+        });
     };
 
-    const updatedHistory = [newAnalysis, ...history];
-    setHistory(updatedHistory);
-    localStorage.setItem('plantAnalysisHistory', JSON.stringify(updatedHistory));
-  };
+    const clearHistory = () => {
+        setHistory([]);
+        localStorage.removeItem('plantAnalysisHistory');
+    };
 
-  const clearHistory = () => {
-    setHistory([]);
-    localStorage.removeItem('plantAnalysisHistory');
-  };
-
-  const deleteHistoryItem = (id) => {
-    const updatedHistory = history.filter(item => item.id !== id);
-    setHistory(updatedHistory);
-    localStorage.setItem('plantAnalysisHistory', JSON.stringify(updatedHistory));
-  };
-
-  return (
-    <HistoryContext.Provider value={{ 
-      history, 
-      addToHistory, 
-      clearHistory, 
-      deleteHistoryItem 
-    }}>
-      {children}
-    </HistoryContext.Provider>
-  );
+    return (
+        <HistoryContext.Provider value={{ history, addToHistory, clearHistory }}>
+            {children}
+        </HistoryContext.Provider>
+    );
 };

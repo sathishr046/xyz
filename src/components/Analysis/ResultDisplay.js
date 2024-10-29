@@ -4,15 +4,17 @@ import './ResultDisplay.css';
 import MedicineSuggestions from './MedicineSuggestions';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { HistoryContext } from '../../context/HistoryContext';
 
 const genAI = new GoogleGenerativeAI('YOUR_API_KEY_HERE');
 
-const ResultDisplay = ({ result }) => {
+const ResultDisplay = ({ result, image }) => {
   const { settings, updateSettings } = useContext(SettingsContext);
   const [translatedContent, setTranslatedContent] = useState(null);
   const [isTranslating, setIsTranslating] = useState(false);
   const [extraQuestion, setExtraQuestion] = useState('');
   const [extraAnswer, setExtraAnswer] = useState('');
+  const { addToHistory } = useContext(HistoryContext);
 
   useEffect(() => {
     const translateResults = async () => {
@@ -46,6 +48,18 @@ const ResultDisplay = ({ result }) => {
 
     translateResults();
   }, [result, settings.language]);
+
+  useEffect(() => {
+    if (result && image) {
+        addToHistory({
+            image: image,
+            result: result,
+            translatedContent: translatedContent || parseAndStructureResult(result),
+            language: settings.language,
+            timestamp: new Date().toISOString()
+        });
+    }
+}, [result, image]);
 
   const handleExtraQuestionSubmit = async () => {
     if (!extraQuestion) return;

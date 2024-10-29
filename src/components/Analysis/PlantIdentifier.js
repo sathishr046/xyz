@@ -1,5 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { HistoryContext } from '../../context/HistoryContext';
 import './PlantIdentifier.css';
 
 const genAI = new GoogleGenerativeAI('AIzaSyAJX0A1MUJ0DuOMzG2SIOKm0yJ-N8kScDI');
@@ -265,7 +266,7 @@ const treesData = [
         name: 'Jamun',
         scientificName: 'Syzygium cumini',
         category: 'trees',
-        emoji: '����',
+        emoji: '🌳',
         description: 'Indian blackberry tree'
     },
     {
@@ -443,6 +444,480 @@ const treesData = [
         category: 'trees',
         emoji: '🌳',
         description: 'Tiger claw tree'
+    }
+];
+
+// Add these new entries to your plants array
+const additionalPlants = [
+    // Rare Tropical Plants
+    {
+        id: 221,
+        name: 'Rafflesia',
+        scientificName: 'Rafflesia arnoldii',
+        category: 'ornamental',
+        emoji: '🌺',
+        description: 'Largest individual flower in the world'
+    },
+    {
+        id: 222,
+        name: 'Ghost Orchid',
+        scientificName: 'Dendrophylax lindenii',
+        category: 'ornamental',
+        emoji: '👻',
+        description: 'Rare endangered orchid'
+    },
+    {
+        id: 223,
+        name: 'Corpse Flower',
+        scientificName: 'Amorphophallus titanum',
+        category: 'ornamental',
+        emoji: '💀',
+        description: 'Largest unbranched inflorescence'
+    },
+    
+    // Medicinal Plants
+    {
+        id: 224,
+        name: 'Ginseng',
+        scientificName: 'Panax ginseng',
+        category: 'medicinal',
+        emoji: '🌿',
+        description: 'Valuable medicinal root'
+    },
+    {
+        id: 225,
+        name: 'Kratom',
+        scientificName: 'Mitragyna speciosa',
+        category: 'medicinal',
+        emoji: '🍃',
+        description: 'Traditional medicinal tree'
+    },
+
+    // Desert Plants
+    {
+        id: 226,
+        name: 'Saguaro Cactus',
+        scientificName: 'Carnegiea gigantea',
+        category: 'others',
+        emoji: '🌵',
+        description: 'Giant desert cactus'
+    },
+    {
+        id: 227,
+        name: 'Joshua Tree',
+        scientificName: 'Yucca brevifolia',
+        category: 'trees',
+        emoji: '🏜️',
+        description: 'Iconic desert tree'
+    },
+
+    // Carnivorous Plants
+    {
+        id: 228,
+        name: 'Venus Flytrap',
+        scientificName: 'Dionaea muscipula',
+        category: 'others',
+        emoji: '🪤',
+        description: 'Carnivorous snap trap plant'
+    },
+    {
+        id: 229,
+        name: 'Pitcher Plant',
+        scientificName: 'Nepenthes',
+        category: 'others',
+        emoji: '⚱️',
+        description: 'Carnivorous pitcher trap'
+    },
+
+    // Ancient Plants
+    {
+        id: 230,
+        name: 'Ginkgo',
+        scientificName: 'Ginkgo biloba',
+        category: 'trees',
+        emoji: '🍂',
+        description: 'Living fossil tree'
+    },
+    {
+        id: 231,
+        name: 'Wollemi Pine',
+        scientificName: 'Wollemia nobilis',
+        category: 'trees',
+        emoji: '🌲',
+        description: 'Prehistoric tree species'
+    },
+
+    // Aquatic Plants
+    {
+        id: 232,
+        name: 'Giant Kelp',
+        scientificName: 'Macrocystis pyrifera',
+        category: 'others',
+        emoji: '🌊',
+        description: 'Marine forest creator'
+    },
+    {
+        id: 233,
+        name: 'Victoria Water Lily',
+        scientificName: 'Victoria amazonica',
+        category: 'others',
+        emoji: '💦',
+        description: 'Giant aquatic plant'
+    },
+
+    // Parasitic Plants
+    {
+        id: 234,
+        name: 'Mistletoe',
+        scientificName: 'Viscum album',
+        category: 'others',
+        emoji: '🎄',
+        description: 'Parasitic holiday plant'
+    },
+    {
+        id: 235,
+        name: 'Dodder',
+        scientificName: 'Cuscuta',
+        category: 'others',
+        emoji: '🕸️',
+        description: 'Parasitic vine'
+    }
+];
+
+// Add these new entries to your plants array
+const morePlants = [
+    // Fruits
+    {
+        id: 236,
+        name: 'Pomegranate',
+        scientificName: 'Punica granatum',
+        category: 'fruits',
+        emoji: '🫐',
+        description: 'Ancient fruit with ruby seeds'
+    },
+    {
+        id: 237,
+        name: 'Dragon Fruit',
+        scientificName: 'Hylocereus undatus',
+        category: 'fruits',
+        emoji: '🐉',
+        description: 'Exotic cactus fruit'
+    },
+    {
+        id: 238,
+        name: 'Passion Fruit',
+        scientificName: 'Passiflora edulis',
+        category: 'fruits',
+        emoji: '🟣',
+        description: 'Tropical vine fruit'
+    },
+    {
+        id: 239,
+        name: 'Star Fruit',
+        scientificName: 'Averrhoa carambola',
+        category: 'fruits',
+        emoji: '⭐',
+        description: 'Star-shaped tropical fruit'
+    },
+    {
+        id: 240,
+        name: 'Kiwi',
+        scientificName: 'Actinidia deliciosa',
+        category: 'fruits',
+        emoji: '🥝',
+        description: 'Fuzzy brown fruit'
+    },
+    {
+        id: 241,
+        name: 'Fig',
+        scientificName: 'Ficus carica',
+        category: 'fruits',
+        emoji: '🪘',
+        description: 'Sweet Mediterranean fruit'
+    },
+    {
+        id: 242,
+        name: 'Lychee',
+        scientificName: 'Litchi chinensis',
+        category: 'fruits',
+        emoji: '🌟',
+        description: 'Sweet Asian fruit'
+    },
+    {
+        id: 243,
+        name: 'Rambutan',
+        scientificName: 'Nephelium lappaceum',
+        category: 'fruits',
+        emoji: '🔴',
+        description: 'Hairy red tropical fruit'
+    },
+    {
+        id: 244,
+        name: 'Durian',
+        scientificName: 'Durio zibethinus',
+        category: 'fruits',
+        emoji: '👑',
+        description: 'King of fruits'
+    },
+    {
+        id: 245,
+        name: 'Mangosteen',
+        scientificName: 'Garcinia mangostana',
+        category: 'fruits',
+        emoji: '🟣',
+        description: 'Queen of fruits'
+    },
+
+    // Flowering Plants
+    {
+        id: 246,
+        name: 'Bird of Paradise',
+        scientificName: 'Strelitzia reginae',
+        category: 'ornamental',
+        emoji: '🦜',
+        description: 'Exotic tropical flower'
+    },
+    {
+        id: 247,
+        name: 'Cherry Blossom',
+        scientificName: 'Prunus serrulata',
+        category: 'ornamental',
+        emoji: '🌸',
+        description: 'Japanese flowering tree'
+    },
+    {
+        id: 248,
+        name: 'Chrysanthemum',
+        scientificName: 'Chrysanthemum morifolium',
+        category: 'ornamental',
+        emoji: '🏵️',
+        description: 'Traditional Asian flower'
+    },
+    {
+        id: 249,
+        name: 'Dahlia',
+        scientificName: 'Dahlia pinnata',
+        category: 'ornamental',
+        emoji: '🎨',
+        description: 'Colorful garden flower'
+    },
+    {
+        id: 250,
+        name: 'Water Lotus',
+        scientificName: 'Nelumbo nucifera',
+        category: 'ornamental',
+        emoji: '🪷',
+        description: 'Sacred aquatic flower'
+    },
+
+    // Berries
+    {
+        id: 251,
+        name: 'Blueberry',
+        scientificName: 'Vaccinium corymbosum',
+        category: 'fruits',
+        emoji: '🫐',
+        description: 'Antioxidant-rich berry'
+    },
+    {
+        id: 252,
+        name: 'Blackberry',
+        scientificName: 'Rubus fruticosus',
+        category: 'fruits',
+        emoji: '🖤',
+        description: 'Wild bramble berry'
+    },
+    {
+        id: 253,
+        name: 'Raspberry',
+        scientificName: 'Rubus idaeus',
+        category: 'fruits',
+        emoji: '❤️',
+        description: 'Sweet red berry'
+    },
+    {
+        id: 254,
+        name: 'Mulberry',
+        scientificName: 'Morus alba',
+        category: 'fruits',
+        emoji: '🫐',
+        description: 'Silkworm food berry'
+    },
+    {
+        id: 255,
+        name: 'Goji Berry',
+        scientificName: 'Lycium barbarum',
+        category: 'fruits',
+        emoji: '🔸',
+        description: 'Superfood berry'
+    },
+
+    // Citrus
+    {
+        id: 256,
+        name: 'Kumquat',
+        scientificName: 'Citrus japonica',
+        category: 'fruits',
+        emoji: '🟠',
+        description: 'Tiny citrus fruit'
+    },
+    {
+        id: 257,
+        name: 'Key Lime',
+        scientificName: 'Citrus × aurantiifolia',
+        category: 'fruits',
+        emoji: '🟢',
+        description: 'Small tart lime'
+    },
+    {
+        id: 258,
+        name: 'Buddha\'s Hand',
+        scientificName: 'Citrus medica var. sarcodactylis',
+        category: 'fruits',
+        emoji: '🖐️',
+        description: 'Fingered citron'
+    },
+    {
+        id: 259,
+        name: 'Yuzu',
+        scientificName: 'Citrus junos',
+        category: 'fruits',
+        emoji: '🌕',
+        description: 'Japanese citrus'
+    },
+    {
+        id: 260,
+        name: 'Calamansi',
+        scientificName: 'Citrofortunella microcarpa',
+        category: 'fruits',
+        emoji: '🟡',
+        description: 'Philippine lime'
+    },
+
+    // Nuts & Seeds
+    {
+        id: 261,
+        name: 'Macadamia',
+        scientificName: 'Macadamia integrifolia',
+        category: 'commercial',
+        emoji: '⚪',
+        description: 'Premium tree nut'
+    },
+    {
+        id: 262,
+        name: 'Pistachio',
+        scientificName: 'Pistacia vera',
+        category: 'commercial',
+        emoji: '🥜',
+        description: 'Green tree nut'
+    },
+    {
+        id: 263,
+        name: 'Brazil Nut',
+        scientificName: 'Bertholletia excelsa',
+        category: 'commercial',
+        emoji: '🌰',
+        description: 'Amazon rainforest nut'
+    },
+    {
+        id: 264,
+        name: 'Kola Nut',
+        scientificName: 'Cola acuminata',
+        category: 'commercial',
+        emoji: '🥤',
+        description: 'Caffeine-rich nut'
+    },
+    {
+        id: 265,
+        name: 'Pine Nut',
+        scientificName: 'Pinus edulis',
+        category: 'commercial',
+        emoji: '🌲',
+        description: 'Conifer seed'
+    },
+
+    // Exotic Vegetables
+    {
+        id: 266,
+        name: 'Romanesco',
+        scientificName: 'Brassica oleracea',
+        category: 'vegetables',
+        emoji: '🌀',
+        description: 'Fractal broccoli'
+    },
+    {
+        id: 267,
+        name: 'Purple Yam',
+        scientificName: 'Dioscorea alata',
+        category: 'vegetables',
+        emoji: '💜',
+        description: 'Colorful tuber'
+    },
+    {
+        id: 268,
+        name: 'Kohlrabi',
+        scientificName: 'Brassica oleracea var. gongylodes',
+        category: 'vegetables',
+        emoji: '🛸',
+        description: 'Alien-looking vegetable'
+    },
+    {
+        id: 269,
+        name: 'Fiddlehead Fern',
+        scientificName: 'Matteuccia struthiopteris',
+        category: 'vegetables',
+        emoji: '🎻',
+        description: 'Curled young fern'
+    },
+    {
+        id: 270,
+        name: 'Samphire',
+        scientificName: 'Salicornia europaea',
+        category: 'vegetables',
+        emoji: '🌊',
+        description: 'Sea asparagus'
+    },
+
+    // Unique Herbs
+    {
+        id: 271,
+        name: 'Shiso',
+        scientificName: 'Perilla frutescens',
+        category: 'spices',
+        emoji: '🍶',
+        description: 'Japanese herb'
+    },
+    {
+        id: 272,
+        name: 'Epazote',
+        scientificName: 'Dysphania ambrosioides',
+        category: 'spices',
+        emoji: '🌿',
+        description: 'Mexican herb'
+    },
+    {
+        id: 273,
+        name: 'Curry Leaf',
+        scientificName: 'Murraya koenigii',
+        category: 'spices',
+        emoji: '🍛',
+        description: 'Indian aromatic leaf'
+    },
+    {
+        id: 274,
+        name: 'Kaffir Lime',
+        scientificName: 'Citrus hystrix',
+        category: 'spices',
+        emoji: '🌿',
+        description: 'Thai citrus leaf'
+    },
+    {
+        id: 275,
+        name: 'Lemon Grass',
+        scientificName: 'Cymbopogon citratus',
+        category: 'spices',
+        emoji: '🌾',
+        description: 'Citrus-scented grass'
     }
 ];
 
@@ -1213,11 +1688,14 @@ const plants = [
       emoji: '🌺',
       description: 'Ornamental climber'
   },
-    ...treesData
+    ...treesData,
+    ...additionalPlants,
+    ...morePlants
 ];
 
 // React Component
 const PlantIdentifier = () => {
+    const { addToHistory } = useContext(HistoryContext);
     const [selectedPlant, setSelectedPlant] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [searchTerm, setSearchTerm] = useState('');
@@ -1228,6 +1706,8 @@ const PlantIdentifier = () => {
     const [stream, setStream] = useState(null);
     const [error, setError] = useState('');
     const videoRef = useRef(null);
+    const [isSpeaking, setIsSpeaking] = useState(false);
+    const speechSynthesisRef = useRef(null);
 
     const handleImageUpload = async (event) => {
         const file = event.target.files[0];
@@ -1336,7 +1816,19 @@ const PlantIdentifier = () => {
             });
 
             const response = await result.response;
-            setResult(response.text());
+            const analysisText = response.text();
+            setResult(analysisText);
+
+            // Add to history after successful analysis
+            addToHistory({
+                image: base64Image,
+                result: analysisText,
+                translatedContent: {
+                    qaFormat: parseAnalysisToQA(analysisText)
+                },
+                timestamp: new Date().toISOString()
+            });
+
             setError('');
         } catch (error) {
             console.error("Analysis error:", error);
@@ -1344,6 +1836,18 @@ const PlantIdentifier = () => {
         } finally {
             setLoading(false);
         }
+    };
+
+    // Helper function to parse analysis text into Q&A format
+    const parseAnalysisToQA = (text) => {
+        const sections = text.split('\n\n').filter(Boolean);
+        return sections.map(section => {
+            const [title, ...content] = section.split('\n');
+            return {
+                question: title.trim(),
+                answer: content.filter(line => line.trim()).map(line => line.trim())
+            };
+        });
     };
 
     const handlePlantSelection = (categoryId) => {
@@ -1372,6 +1876,36 @@ const PlantIdentifier = () => {
         const matchesCategory = selectedCategory === 'all' || plant.category === selectedCategory;
         return matchesSearch && matchesCategory;
     });
+
+    const handleReadAloud = () => {
+        if (!result) return;
+
+        if (isSpeaking) {
+            window.speechSynthesis.cancel();
+            setIsSpeaking(false);
+            return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(result);
+        utterance.rate = 0.9; // Slightly slower for better clarity
+        utterance.pitch = 1;
+        
+        utterance.onend = () => {
+            setIsSpeaking(false);
+        };
+
+        speechSynthesisRef.current = utterance;
+        window.speechSynthesis.speak(utterance);
+        setIsSpeaking(true);
+    };
+
+    useEffect(() => {
+        return () => {
+            if (isSpeaking) {
+                window.speechSynthesis.cancel();
+            }
+        };
+    }, [isSpeaking]);
 
     return (
         <div className="plant-identifier-container">
@@ -1518,6 +2052,18 @@ const PlantIdentifier = () => {
 
                         {result && (
                             <div className="analysis-result">
+                                <div className="result-header">
+                                    <button 
+                                        className={`read-aloud-button ${isSpeaking ? 'speaking' : ''}`}
+                                        onClick={handleReadAloud}
+                                        aria-label={isSpeaking ? 'Stop reading' : 'Read aloud'}
+                                    >
+                                        <span className="read-aloud-icon">
+                                            {isSpeaking ? '🔊' : '🔈'}
+                                        </span>
+                                        {isSpeaking ? 'Stop Reading' : 'Read Aloud'}
+                                    </button>
+                                </div>
                                 <pre>{result}</pre>
                             </div>
                         )}

@@ -18,9 +18,9 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
-      <SettingsProvider>
-        <HistoryProvider>
+    <HistoryProvider>
+      <Router>
+        <SettingsProvider>
           <div className="app">
             <Navbar />
             <main className="main-content">
@@ -39,9 +39,9 @@ function App() {
               <ToastContainer />
             </div>
           </div>
-        </HistoryProvider>
-      </SettingsProvider>
-    </Router>
+        </SettingsProvider>
+      </Router>
+    </HistoryProvider>
   );
 }
 
