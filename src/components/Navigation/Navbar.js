@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { SettingsContext } from '../../context/SettingsContext';
 import SettingsModal from '../Settings/SettingsModal';
+import CropInsights from '../CropInsights/CropInsights';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -44,6 +45,10 @@ const Navbar = () => {
         <Link to="/encyclopedia" className={`nav-link ${isActive('/encyclopedia') ? 'active' : ''}`}>
           📚
           <span>{translate('encyclopedia')}</span>
+        </Link>
+        <Link to="/crop-insights" className={`nav-link ${isActive('/crop-insights') ? 'active' : ''}`}>
+          📊
+          <span>Crop Insights</span>
         </Link>
         <Link to="/community" className={`nav-link ${isActive('/community') ? 'active' : ''}`}>
           👥

@@ -1743,7 +1743,18 @@ const PlantIdentifier = () => {
 
     const startCamera = async () => {
         try {
-            const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
+            // Check if it's a mobile device
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            const constraints = {
+                video: isMobile 
+                    ? { 
+                        facingMode: { exact: "environment" }  // Use back camera on mobile
+                      }
+                    : true  // Use default (front) camera on desktop
+            };
+
+            const mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
             setStream(mediaStream);
             setShowCamera(true);
             if (videoRef.current) {
@@ -1751,7 +1762,24 @@ const PlantIdentifier = () => {
             }
         } catch (error) {
             console.error('Camera error:', error);
-            setError('Unable to access camera. Please make sure you have granted permission.');
+            // If environment camera fails, fall back to any available camera
+            if (error.name === 'OverconstrainedError') {
+                try {
+                    const mediaStream = await navigator.mediaDevices.getUserMedia({ 
+                        video: true 
+                    });
+                    setStream(mediaStream);
+                    setShowCamera(true);
+                    if (videoRef.current) {
+                        videoRef.current.srcObject = mediaStream;
+                    }
+                } catch (fallbackError) {
+                    console.error('Fallback camera error:', fallbackError);
+                    setError('Unable to access camera. Please make sure you have granted permission.');
+                }
+            } else {
+                setError('Unable to access camera. Please make sure you have granted permission.');
+            }
         }
     };
 
