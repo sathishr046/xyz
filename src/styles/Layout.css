@@ -1,0 +1,26 @@
+.page-container {
+    padding-top: 80px; /* Adjust based on your navbar height */
+    min-height: 100vh;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .page-header {
+    margin-bottom: 2rem;
+    padding-top: 1rem;
+  }
+  
+  .page-title {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  
+  .page-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+  } 

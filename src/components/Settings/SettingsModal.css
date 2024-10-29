@@ -9,122 +9,125 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(5px);
 }
 
 .settings-content {
-  background: white;
-  border-radius: 20px;
+  background: var(--bg-primary);
+  border-radius: 12px;
   width: 90%;
-  max-width: 600px;
+  max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-  animation: slideUp 0.3s ease-out;
 }
 
 .settings-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem;
-  border-bottom: 1px solid #eee;
-}
-
-.settings-tabs {
-  display: flex;
-  gap: 1rem;
-  padding: 1rem;
-  border-bottom: 1px solid #eee;
-}
-
-.tab {
-  padding: 0.5rem 1rem;
-  border: none;
-  background: none;
-  cursor: pointer;
-  border-radius: 15px;
-  transition: all 0.3s ease;
-}
-
-.tab.active {
-  background: #2ecc71;
-  color: white;
 }
 
 .settings-body {
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 .settings-section {
-  animation: fadeIn 0.3s ease-out;
+  margin-bottom: 1.5rem;
 }
 
-.theme-options, .font-size-slider {
+.setting-row {
   display: flex;
-  gap: 1rem;
-  margin: 1rem 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
 }
 
-.theme-button, .font-size-button {
-  padding: 0.8rem 1.2rem;
-  border: 2px solid #eee;
-  border-radius: 15px;
-  background: white;
+/* Font Selection */
+.font-toggle {
+  padding: 0.5rem 1rem;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
-.theme-button.active, .font-size-button.active {
-  border-color: #2ecc71;
-  background: #e8f5e9;
-}
-
-.language-grid {
+.font-options {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
-  margin: 1rem 0;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 8px;
 }
 
-.language-button {
-  padding: 1rem;
-  border: 2px solid #eee;
-  border-radius: 15px;
-  background: white;
+.font-button {
+  padding: 0.75rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  text-align: left;
 }
 
-.language-button.active {
-  border-color: #2ecc71;
-  background: #e8f5e9;
+.font-button.active {
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+  color: white;
 }
 
-.ai-translation-info {
-  margin-top: 2rem;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 15px;
-  text-align: center;
+/* Toggle Switch */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
 }
 
-@keyframes slideUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: var(--accent-color);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(26px);
+}
+
+/* Language Select */
+select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }

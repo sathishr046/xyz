@@ -1,0 +1,416 @@
+.care-indicators {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.care-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.care-item span {
+  font-size: 1.2rem;
+}
+
+.level-dots {
+  color: var(--accent-color);
+  letter-spacing: 2px;
+}
+
+.plant-category {
+  text-align: center;
+}
+
+.category-tag {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: var(--accent-color);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+@media (max-width: 768px) {
+  .plant-name {
+    font-size: 1.2rem;
+  }
+  
+  .scientific-name {
+    font-size: 0.8rem;
+  }
+}
+
+.plant-card-container {
+  width: 300px;
+  margin: 20px;
+}
+
+.plant-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.plant-card:hover {
+  transform: translateY(-5px);
+}
+
+.plant-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.plant-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.plant-emoji {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.plant-info {
+  padding: 20px;
+  text-align: center;
+}
+
+.plant-info h2 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 24px;
+}
+
+.scientific-name {
+  color: #7f8c8d;
+  font-style: italic;
+  margin: 5px 0 15px;
+  font-size: 14px;
+}
+
+.care-guide-button {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.care-guide-button:hover {
+  background: #2980b9;
+}
+
+.care-guide-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.care-guide-content {
+  background: white;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.care-guide-header {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: white;
+}
+
+.care-guide-header h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #2c3e50;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #95a5a6;
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+}
+
+.close-button:hover {
+  color: #e74c3c;
+}
+
+.care-guide-body {
+  padding: 20px;
+}
+
+.plant-description {
+  color: #34495e;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.care-items {
+  display: grid;
+  gap: 15px;
+}
+
+.care-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.care-icon {
+  background: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.care-text h4 {
+  margin: 0 0 5px;
+  color: #2c3e50;
+  font-size: 16px;
+}
+
+.care-text p {
+  margin: 0;
+  color: #34495e;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Grid layout for cards */
+.plants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 30px;
+  justify-items: center;
+}
+
+@media (max-width: 768px) {
+  .care-guide-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  width: 95%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
+}
+
+.modal-title h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #2c3e50;
+}
+
+.care-guide-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.care-guide-hero img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.quick-facts {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.quick-facts ul {
+  list-style: none;
+  padding: 0;
+}
+
+.quick-facts li {
+  margin: 10px 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+.quick-facts li:before {
+  content: "•";
+  color: var(--accent-color);
+  position: absolute;
+  left: 0;
+}
+
+.care-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.care-item {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 15px;
+  transition: transform 0.2s ease;
+}
+
+.care-item:hover {
+  transform: translateY(-5px);
+}
+
+.care-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.care-tips {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.problems-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.problem-item {
+  background: #fff5f5;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.propagation ul {
+  list-style: none;
+  padding: 0;
+}
+
+.propagation li {
+  margin: 10px 0;
+  padding-left: 25px;
+  position: relative;
+}
+
+.propagation li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+}
+
+section {
+  margin: 30px 0;
+}
+
+section h3 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-size: 1.4rem;
+}
+
+@media (max-width: 768px) {
+  .care-guide-hero {
+    grid-template-columns: 1fr;
+  }
+  
+  .care-guide-hero img {
+    height: 200px;
+  }
+}
+
+/* Smooth scrollbar for modal */
+.modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 #fff;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #cbd5e0;
+  border-radius: 20px;
+  border: 3px solid #fff;
+}

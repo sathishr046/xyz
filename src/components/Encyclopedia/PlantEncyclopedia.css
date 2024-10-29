@@ -1,50 +1,76 @@
+:root {
+  --primary-gradient: linear-gradient(135deg, #2ecc71, #27ae60);
+  --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --hover-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  --card-radius: 20px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .encyclopedia-container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  min-height: 100vh;
+}
+
+.encyclopedia-title {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .encyclopedia-header {
   text-align: center;
   margin-bottom: 3rem;
+  position: relative;
 }
 
 .encyclopedia-header h1 {
-  font-size: 2.5rem;
-  color: var(--text-primary);
+  font-size: 3rem;
   margin-bottom: 1.5rem;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  display: inline-block;
+}
+
+.encyclopedia-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: var(--primary-gradient);
+  border-radius: 2px;
 }
 
 .search-container {
-  max-width: 600px;
-  margin: 0 auto;
-  position: relative;
+  margin: 20px 0;
 }
 
 .search-input {
   width: 100%;
-  padding: 1rem 1.5rem;
-  border-radius: 30px;
-  border: 2px solid var(--border-color);
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: var(--accent-color);
-  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 .category-filters {
   display: flex;
   gap: 1rem;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
-  justify-content: center;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.category-filters::-webkit-scrollbar {
+  display: none;
 }
 
 .category-button {
@@ -54,183 +80,353 @@
   background: var(--bg-secondary);
   color: var(--text-primary);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition);
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 1rem;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.category-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--hover-shadow);
 }
 
 .category-button.active {
-  background: var(--accent-color);
+  background: var(--primary-gradient);
   color: white;
-}
-
-.category-icon {
-  font-size: 1.2rem;
 }
 
 .plants-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
+  padding: 2rem;
 }
 
-.plant-card {
-  background: var(--bg-secondary);
-  border-radius: 20px;
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+}
+
+.loading-container {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.loading-progress {
+  background: #f0f0f0;
+  height: 8px;
+  border-radius: 4px;
   overflow: hidden;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  margin-bottom: 1rem;
 }
 
-.plant-image-container {
-  position: relative;
-  padding-top: 75%;
-  overflow: hidden;
-}
-
-.plant-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+.progress-bar {
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+  background: linear-gradient(90deg, #2ecc71, #27ae60);
+  transition: width 0.3s ease;
 }
 
-.plant-card:hover .plant-image {
-  transform: scale(1.1);
-}
-
-.plant-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.5rem;
-  background: linear-gradient(transparent, rgba(0,0,0,0.8));
-  color: white;
-}
-
-.plant-details {
-  padding: 1.5rem;
-}
-
-.care-indicators {
+.loading-text {
   display: flex;
-  gap: 1rem;
-  font-size: 1.2rem;
-}
-
-/* Modal Styles */
-.plant-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.8);
-  display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 2rem;
-  z-index: 1000;
+  color: #2c3e50;
+  font-size: 1rem;
 }
 
-.plant-modal-content {
-  background: var(--bg-primary);
+.loading-count {
+  background: #f8f9fa;
+  padding: 0.3rem 0.8rem;
   border-radius: 20px;
-  max-width: 1000px;
-  width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
+  font-size: 0.9rem;
+  color: #2ecc71;
 }
 
-.close-button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: var(--text-primary);
+.success-message {
+  text-align: center;
+  color: #2ecc71;
+  font-size: 1.1rem;
+  padding: 1rem;
+  background: #f0fff4;
+  border-radius: 8px;
+  margin-bottom: 2rem;
 }
 
-.modal-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  padding: 2rem;
-}
-
-.modal-image img {
-  width: 100%;
-  border-radius: 15px;
-}
-
-.care-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-
-.care-item {
-  background: var(--bg-secondary);
-  padding: 1.5rem;
-  border-radius: 15px;
+.error-message {
+  color: #e74c3c;
+  background: #fff5f5;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
-.care-icon {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+.status-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #2ecc71;
+  font-weight: 500;
 }
 
-/* Mobile Responsiveness */
+.success-icon {
+  background: #2ecc71;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.loading-plant {
+  animation: pulse 1.5s infinite;
+}
+
+.loader {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--bg-secondary);
+  border-top: 4px solid var(--accent-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Comparison Feature Styles */
+.comparison-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  z-index: 100;
+}
+
+/* Seasonal Guide Styles */
+.seasonal-guide {
+  background: var(--bg-secondary);
+  border-radius: var(--card-radius);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+
+.season-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.season-tab {
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+/* Growing Zones Map */
+.zones-map-container {
+  height: 400px;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .encyclopedia-header h1 {
     font-size: 2rem;
   }
 
+  .encyclopedia-container {
+    padding: 1rem;
+  }
+
+  .encyclopedia-title {
+    font-size: 2rem;
+  }
+
+  .plants-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
   .category-filters {
-    gap: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 }
 
-.image-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
+@media (max-width: 480px) {
+  .encyclopedia-container {
+    padding: 1rem;
+  }
+
+  .plants-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.image-skeleton {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: loading 1.5s infinite;
+.status-container {
+  margin: 2rem auto;
+  max-width: 600px;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.image-fallback {
+.loading-indicator {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background: #f8f9fa;
-  font-size: 2rem;
+  gap: 1.5rem;
 }
 
-@keyframes loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #2ecc71;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-details {
+  flex: 1;
+}
+
+.loading-details p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.error-message {
+  color: #e74c3c;
+  padding: 1rem;
+  background: #fdf0f0;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.error-message button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.success-message {
+  color: #2ecc71;
+  text-align: center;
+  font-weight: 500;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.plants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.plant-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.plant-card:hover {
+  transform: translateY(-5px);
+}
+
+.plant-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.plant-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.plant-info {
+  padding: 1.5rem;
+}
+
+.plant-info h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+.scientific-name {
+  color: #7f8c8d;
+  font-style: italic;
+  margin: 0.5rem 0;
+}
+
+.description {
+  color: #34495e;
+  margin: 1rem 0;
+  line-height: 1.5;
+}
+
+.care-guide {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.care-guide h4 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+}
+
+.care-items {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.care-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #34495e;
+}
+
+.care-item span {
+  font-weight: 500;
 }

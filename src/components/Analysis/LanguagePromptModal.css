@@ -1,0 +1,54 @@
+.language-prompt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.language-prompt-modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 600px;
+    width: 90%;
+}
+
+.language-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.language-select-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.language-select-btn:hover {
+    border-color: #2ecc71;
+    transform: translateY(-2px);
+}
+
+.lang-flag {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.lang-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+}

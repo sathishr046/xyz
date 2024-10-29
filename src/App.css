@@ -36,3 +36,50 @@
     transform: rotate(360deg);
   }
 }
+
+/* Add proper spacing for content */
+.content-wrapper {
+  padding-top: 80px; /* Increased from 60px to give more space */
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Fix for section headings */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.app {
+  min-height: 100vh;
+  position: relative;
+}
+
+.main-content {
+  min-height: calc(100vh - 80px);
+}
+
+/* Ensure all page content respects the navbar */
+.page-content {
+  padding-top: 1rem;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+  padding-top: 1.5rem;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}

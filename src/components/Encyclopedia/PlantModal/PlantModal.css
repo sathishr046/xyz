@@ -1,0 +1,179 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--bg-primary);
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-primary);
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+  background-color: var(--bg-secondary);
+}
+
+.modal-header {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: flex-start;
+}
+
+.modal-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+  flex: 1;
+}
+
+.modal-title h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 2rem;
+}
+
+.scientific-name {
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0.5rem 0;
+}
+
+.modal-body {
+  color: var(--text-primary);
+}
+
+.care-guide {
+  margin-bottom: 2rem;
+}
+
+.care-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.care-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.care-item:hover {
+  transform: translateY(-2px);
+}
+
+.care-item span {
+  font-size: 1.5rem;
+}
+
+.description {
+  margin-bottom: 2rem;
+}
+
+.description p {
+  line-height: 1.6;
+}
+
+.diseases {
+  margin-bottom: 2rem;
+}
+
+.disease-item {
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.disease-item h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+}
+
+.disease-item p {
+  margin: 0.5rem 0;
+}
+
+.treatment {
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
+.growing-tips {
+  margin-bottom: 2rem;
+}
+
+.growing-tips ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.growing-tips li {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.growing-tips li:before {
+  content: "•";
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .modal-header {
+    flex-direction: column;
+  }
+
+  .modal-image {
+    width: 100%;
+    height: 250px;
+  }
+
+  .care-details {
+    grid-template-columns: 1fr;
+  }
+}
+

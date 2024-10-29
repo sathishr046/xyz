@@ -50,3 +50,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Add these to your existing styles */
+
+/* Responsive base styles */
+html {
+  font-size: 16px;
+}
+
+/* Mobile-first approach */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 481px) and (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* Ensure all images are responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure form elements are mobile-friendly */
+input, select, textarea, button {
+  font-size: 16px; /* Prevents iOS zoom on focus */
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Add touch-friendly padding to interactive elements */
+button, 
+.nav-link,
+input[type="submit"] {
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+}
