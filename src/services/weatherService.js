@@ -23,5 +23,28 @@ export const WeatherService = {
     } catch (error) {
       throw new Error('Unable to fetch weather data');
     }
+  },
+
+  async getForecast(city, days = 5) {
+    try {
+      const response = await fetch(
+        `${WEATHER_API_BASE}/forecast.json?key=${WEATHER_API_KEY}&q=${city}&days=${days}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Weather API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.forecast.forecastday;
+    } catch (error) {
+      throw new Error('Unable to fetch forecast data');
+    }
   }
 };

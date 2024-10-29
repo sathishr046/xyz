@@ -20,7 +20,8 @@ const WeatherIntegration = () => {
       setLoading(true);
       setError(null);
       const data = await WeatherService.getWeatherByCity(searchQuery.trim());
-      setWeatherData(data);
+      const forecastData = await WeatherService.getForecast(searchQuery.trim(), 5);
+      setWeatherData({ ...data, forecast: forecastData });
     } catch (err) {
       console.error('Weather error:', err);
       setError(err.message);
@@ -64,6 +65,7 @@ const WeatherIntegration = () => {
         {weatherData && (
           <>
             <WeatherDisplay data={weatherData} />
+            {weatherData.forecast && <WeatherForecast forecast={weatherData.forecast} />}
             <WeatherAnalysis weatherData={weatherData} />
           </>
         )}

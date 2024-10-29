@@ -1,76 +1,104 @@
 import React, { useState } from 'react';
+import { GeminiService } from '../../services/geminiService';
+import { FaSeedling, FaChartLine, FaExclamationTriangle, 
+         FaList, FaCheckSquare, FaBug, FaTint, FaLeaf } from 'react-icons/fa';
 import './WeatherAnalysis.css';
 
 const WeatherAnalysis = ({ weatherData }) => {
   const [cropType, setCropType] = useState('');
   const [analysis, setAnalysis] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const handleAnalysis = (e) => {
+  const handleAnalysis = async (e) => {
     e.preventDefault();
     if (!cropType.trim()) return;
 
-    // Simple analysis based on weather conditions
-    const temp = weatherData.current.temp_c;
-    const humidity = weatherData.current.humidity;
-    const windSpeed = weatherData.current.wind_kph;
-
-    let suitability = 'Suitable';
-    const risks = [];
-    const actions = [];
-
-    if (temp > 30) {
-      risks.push('High temperature may affect crop growth');
-      actions.push('Consider providing shade');
+    try {
+      setLoading(true);
+      setError(null);
+      const analysisData = await GeminiService.getPlantAnalysis(cropType, weatherData);
+      setAnalysis(analysisData);
+    } catch (err) {
+      setError(err.message);
+      console.error('Analysis error:', err);
+    } finally {
+      setLoading(false);
     }
-
-    if (humidity < 40) {
-      risks.push('Low humidity might stress plants');
-      actions.push('Increase irrigation frequency');
-    }
-
-    if (windSpeed > 20) {
-      risks.push('Strong winds could damage crops');
-      actions.push('Install wind barriers');
-    }
-
-    setAnalysis({ suitability, risks, actions });
   };
 
   return (
     <div className="weather-analysis">
-      <h3>Crop Weather Analysis</h3>
-      <form onSubmit={handleAnalysis} className="crop-input">
-        <input
-          type="text"
-          value={cropType}
-          onChange={(e) => setCropType(e.target.value)}
-          placeholder="Enter crop type (e.g., Tomato)"
-        />
-        <button type="submit">Analyze</button>
+      <h2>Crop Weather Analysis</h2>
+      
+      <form onSubmit={handleAnalysis} className="analysis-form">
+        <div className="input-group">
+          <input
+            type="text"
+            value={cropType}
+            onChange={(e) => setCropType(e.target.value)}
+            placeholder="Enter crop or plant name (e.g., Tomato)"
+            className="crop-input"
+          />
+          <button type="submit" className="analyze-btn" disabled={loading}>
+            {loading ? 'Analyzing...' : 'Analyze'}
+          </button>
+        </div>
       </form>
 
+      {loading && (
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p>Analyzing growing conditions...</p>
+        </div>
+      )}
+
+      {error && (
+        <div className="error-message">
+          <p>{error}</p>
+        </div>
+      )}
+
       {analysis && (
-        <div className="analysis-results">
-          <div className="analysis-card">
-            <div className="suitability">
-              Weather Suitability: {analysis.suitability}
-            </div>
-            <div className="risks">
-              <h4>Potential Risks:</h4>
-              <ul>
-                {analysis.risks.map((risk, index) => (
-                  <li key={index}>{risk}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="actions">
-              <h4>Recommended Actions:</h4>
-              <ul>
-                {analysis.actions.map((action, index) => (
-                  <li key={index}>{action}</li>
-                ))}
-              </ul>
-            </div>
+        <div className="analysis-grid">
+          <div className="analysis-card suitability">
+            <h3><FaSeedling /> Suitability</h3>
+            <p>{analysis.suitability}</p>
+          </div>
+          
+          <div className="analysis-card growth-stage">
+            <h3><FaChartLine /> Growth Stage</h3>
+            <p>{analysis.growthStage}</p>
+          </div>
+          
+          <div className="analysis-card risks">
+            <h3><FaExclamationTriangle /> Risks</h3>
+            <p>{analysis.risks}</p>
+          </div>
+          
+          <div className="analysis-card care">
+            <h3><FaList /> Care Instructions</h3>
+            <p>{analysis.care}</p>
+          </div>
+          
+          <div className="analysis-card milestones">
+            <h3><FaCheckSquare /> Milestones</h3>
+            <p>{analysis.milestones}</p>
+          </div>
+          
+          <div className="analysis-card pest-management">
+            <h3><FaBug /> Pest Management</h3>
+            <p>{analysis.pestManagement}</p>
+          </div>
+          
+          <div className="analysis-card irrigation">
+            <h3><FaTint /> Irrigation</h3>
+            <p>{analysis.irrigation}</p>
+          </div>
+          
+          <div className="analysis-card soil">
+            <h3><FaLeaf /> Soil Management</h3>
+            <p>{analysis.soilManagement}</p>
           </div>
         </div>
       )}
