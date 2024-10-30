@@ -68,7 +68,7 @@ export const GeminiService = {
             "soilTypes": ["string"],
             "avgRainfall": number
           },
-          "viabilityScore": number,
+          "viabilityScore": number (between 0-10),
           "marketPotential": "string",
           "waterRequirements": "string",
           "climateSuitability": "string",

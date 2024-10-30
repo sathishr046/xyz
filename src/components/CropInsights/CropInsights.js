@@ -161,9 +161,9 @@ const CropInsights = () => {
           <div className="recommendations-card">
             <h3>Market Intelligence Report</h3>
             <div className="recommendation-score">
-              <div className={`score ${analysis.viabilityScore >= 70 ? 'high' : 
-                             analysis.viabilityScore >= 40 ? 'medium' : 'low'}`}>
-                {analysis.viabilityScore}/100
+              <div className={`score ${analysis.viabilityScore >= 7 ? 'high' : 
+                       analysis.viabilityScore >= 4 ? 'medium' : 'low'}`}>
+                {analysis.viabilityScore}/10
               </div>
               <p className="score-label">Crop Viability Score</p>
             </div>

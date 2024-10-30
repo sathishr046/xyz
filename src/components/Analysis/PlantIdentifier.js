@@ -1935,6 +1935,59 @@ const PlantIdentifier = () => {
         };
     }, [isSpeaking]);
 
+    // Add new paste handler
+    const handlePaste = async (event) => {
+        const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+        let blob = null;
+
+        for (const item of items) {
+            if (item.type.indexOf('image') === 0) {
+                blob = item.getAsFile();
+                break;
+            }
+        }
+
+        if (!blob) {
+            setError('No image found in clipboard. Please copy an image first.');
+            return;
+        }
+
+        if (blob.size > 4 * 1024 * 1024) {
+            setError('Image size too large. Please use an image smaller than 4MB.');
+            return;
+        }
+
+        setError('');
+        setResult('');
+        setLoading(true);
+
+        try {
+            setImage(URL.createObjectURL(blob));
+            
+            const reader = new FileReader();
+            reader.onloadend = async () => {
+                const base64data = reader.result.split(',')[1];
+                await analyzePlantImage(base64data, blob.type);
+            };
+            reader.onerror = () => {
+                setError('Failed to read image from clipboard. Please try again.');
+            };
+            reader.readAsDataURL(blob);
+        } catch (error) {
+            console.error('Paste error:', error);
+            setError('Failed to process pasted image. Please try again.');
+            setLoading(false);
+        }
+    };
+
+    // Add paste event listener
+    useEffect(() => {
+        document.addEventListener('paste', handlePaste);
+        return () => {
+            document.removeEventListener('paste', handlePaste);
+        };
+    }, []);
+
     return (
         <div className="plant-identifier-container">
             <div className="translate-widget-container">
@@ -2029,6 +2082,15 @@ const PlantIdentifier = () => {
                                 onClick={startCamera}
                             >
                                 📸 Take Photo
+                            </button>
+                            <button 
+                                className="paste-button"
+                                onClick={() => {
+                                    setError('Press Ctrl+V or Cmd+V to paste an image');
+                                    setTimeout(() => setError(''), 3000);
+                                }}
+                            >
+                                📋 Paste Image
                             </button>
                         </div>
 
