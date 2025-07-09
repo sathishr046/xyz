@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI("AIzaSyAJX0A1MUJ0DuOMzG2SIOKm0yJ-N8kScDI");
+const genAI = new GoogleGenerativeAI("AIzaSyDjo7wOP3QOfdXAcAmf1FRuJDROLj5ejPo");
 
 export const GeminiService = {
   async getCropMarketAnalysis(cropName) {

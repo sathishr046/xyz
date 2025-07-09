@@ -20,7 +20,7 @@ export const SettingsProvider = ({ children }) => {
       encyclopedia: 'Encyclopedia',
       weather: 'Weather',
       community: 'Community',
-      about: 'About',
+
       welcome: 'Welcome to PlantCare AI',
       subtitle: 'Advanced Plant Disease Detection & Treatment Recommendations',
       startAnalysis: 'Start Analysis'

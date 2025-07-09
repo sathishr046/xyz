@@ -6,7 +6,7 @@ import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { HistoryContext } from '../../context/HistoryContext';
 
-const genAI = new GoogleGenerativeAI('YOUR_API_KEY_HERE');
+const genAI = new GoogleGenerativeAI('AIzaSyDjo7wOP3QOfdXAcAmf1FRuJDROLj5ejPo');
 
 const ResultDisplay = ({ result, image }) => {
   const { settings, updateSettings } = useContext(SettingsContext);

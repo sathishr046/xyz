@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { plantsData } from '../data/plantsData';
 
-const genAI = new GoogleGenerativeAI('AIzaSyAJX0A1MUJ0DuOMzG2SIOKm0yJ-N8kScDI');
+const genAI = new GoogleGenerativeAI('AIzaSyDjo7wOP3QOfdXAcAmf1FRuJDROLj5ejPo');
 
 export const fetchPlantInfo = async (plantName, settings = { language: 'en' }) => {
   console.log(`Starting API request for ${plantName}`);
