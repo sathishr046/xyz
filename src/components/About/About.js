@@ -2,7 +2,7 @@ import React from 'react';
 import './About.css';
 
 // Import images
-import mithunImage from '../../assets/images/mithun.jpg';
+
 import manojImage from '../../assets/images/manoj.jpg';
 import swaroopImage from '../../assets/images/swaroop.jpg';
 import shamanthImage from '../../assets/images/shamanth.jpg';
@@ -10,10 +10,9 @@ import shamanthImage from '../../assets/images/shamanth.jpg';
 const About = () => {
   const experts = [
     {
-      name: "Mithun R",
+      name: "Sathish R",
       phone: "8792048404",
       role: "Technical Queries",
-      image: mithunImage,
       expertise: "AI & Machine Learning"
     },
     {
