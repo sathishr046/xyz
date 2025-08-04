@@ -3,9 +3,7 @@ import './About.css';
 
 // Import images
 
-import manojImage from '../../assets/images/manoj.jpg';
-import swaroopImage from '../../assets/images/swaroop.jpg';
-import shamanthImage from '../../assets/images/shamanth.jpg';
+
 
 const About = () => {
   const experts = [
